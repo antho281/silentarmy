@@ -586,7 +586,7 @@ void equihash_round(uint round,
         first_words[i] = (*(__global uchar *)p) & mask;
     
     // find collisions
-    for (i = 0; i < cnt-1 && thCollNum < NR_SLOTS*3; i++) {
+    for (i = 0; i < cnt-1 && thCollNum < NR_SLOTS*CMULT; i++) {
         uchar data_i = first_words[i];
         uint collision = (tid << 10) | (i << 5) | (i + 1);
 
@@ -693,7 +693,7 @@ void kernel_round8(__global char *ht_src, __global char *ht_dst,
 {
     uint                tid = get_global_id(0);
     __local uchar first_words_data[(NR_SLOTS+2)*64];
-    __local uint    collisionsData[NR_SLOTS*3*64];    
+    __local uint    collisionsData[NR_SLOTS*CMULT*64];    
     __local uint    collisionsNum;
     equihash_round(8, ht_src, ht_dst, debug, first_words_data, collisionsData, &collisionsNum, rowCountersSrc, rowCountersDst);
     if (!tid)
