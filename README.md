@@ -173,7 +173,7 @@ Compiling SILENTARMY is easy:
 You may need to specify the paths to the locations of your OpenCL C headers
 and libOpenCL.so if the compiler does not find them, eg.:
 
-`$ make OPENCL_HEADERS=/usr/local/cuda-8.0/targets/x86_64-linux/include LIBOPENCL=/usr/local/cuda-8.0/targets/x86_64-linux/lib`
+`make OPENCL_HEADERS=/usr/local/cuda-8.0/include LIBOPENCL=/usr/local/cuda-8.0/lib64`
 
 Self-testing the command-line solver (solves 100 all-zero 140-byte blocks with
 their nonces varying from 0 to 99):
