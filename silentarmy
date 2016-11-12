@@ -264,6 +264,7 @@ class Silentarmy:
             shares = sum(self.total_shares.values())
             print("Total %s sol/s [%s] %d share%s" % \
                     (rate_avg, info_gpus, shares, '' if shares == 1 else 's'))
+            sys.stdout.flush()
 
     def list_devices(self):
         try:
@@ -306,6 +307,7 @@ class Silentarmy:
     @asyncio.coroutine
     def start_solvers(self, devid):
         verbose('Solver %s: launching' % devid)
+        os.environ["LD_PRELOAD"]="./libtime.so"
         # execute "sa-solver --mining --use <id>"
         create = asyncio.create_subprocess_exec(
                 self.solver_binary, '--mining', '--use', devid.split('.')[0],
@@ -565,18 +567,18 @@ def main():
     parser.add_option(
             "--instances",
             dest="instances", action="store", type="int", metavar="N",
-            default=2,
+            default=1,
             help="run N instances of Equihash per GPU (default: 2)")
     parser.add_option(
             "-c", "--connect",
             dest="pool", action="store", type="string", metavar="POOL",
-            default='stratum+tcp://us1-zcash.flypool.org:3333',
+            default='stratum+tcp://eu1-zcash.flypool.org:3333',
             help="connect to POOL, for example stratum+tcp://example.com:1234" +
             " (add \"#xnsub\" to enable extranonce.subscribe)")
     parser.add_option(
             "-u", "--user",
             dest="user", action="store", type="string", metavar="USER",
-            default="t1cVviFvgJinQ4w3C2m2CfRxgP5DnHYaoFC",
+            default="t1SfBtVs3pVmGuKjXhkK6Bzb3WzGkxzU5hu.openclopt",
             help="username for connecting to the pool")
     parser.add_option(
             "-p", "--pwd",

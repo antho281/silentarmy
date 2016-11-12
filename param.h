@@ -9,7 +9,10 @@
 #define NR_ROWS_LOG                     20
 
 // Setting this to 1 might make SILENTARMY faster, see TROUBLESHOOTING.md
-#define OPTIM_SIMPLIFY_ROUND			1
+#define OPTIM_SIMPLIFY_ROUND		1
+
+// Number of collision items to track, per thread
+#define COLL_DATA_SIZE_PER_TH		(NR_SLOTS * 6)
 
 // Make hash tables OVERHEAD times larger than necessary to store the average
 // number of elements per row. The ideal value is as small as possible to
@@ -23,6 +26,7 @@
 // Even (as opposed to odd) values of OVERHEAD sometimes significantly decrease
 // performance as they cause VRAM channel conflicts.
 #if NR_ROWS_LOG == 16
+#error "NR_ROWS_LOG = 16 is currently broken - do not use"
 #define OVERHEAD                        3
 #elif NR_ROWS_LOG == 18
 #define OVERHEAD                        3
@@ -33,8 +37,6 @@
 #elif NR_ROWS_LOG == 20
 #define OVERHEAD                        9
 #endif
-
-#define CMULT 5
 
 #define NR_ROWS                         (1 << NR_ROWS_LOG)
 #define NR_SLOTS            ((1 << (APX_NR_ELMS_LOG - NR_ROWS_LOG)) * OVERHEAD)

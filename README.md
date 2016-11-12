@@ -83,19 +83,15 @@ and statistics in progressively more and more details.
 
 # Performance
 
-* 51.0 sol/s with one R9 Nano
-* 44.0 sol/s with one RX 480 8GB
-* 30.5 sol/s with one GTX Titan X (Maxwell)
-* 30.5 sol/s with one GTX Titan (Kepler)
+* 115.0 sol/s with one R9 Nano
+* 75.0 sol/s with one RX 480 8GB
+* (TODO: add Nvidia performance numbers)
 
 Note: the `silentarmy` **miner** automatically achieves this performance level,
 however the `sa-solver` **command-line solver** by design runs only 1 instance
-of the Equihash proof-of-work algorithm causing it to underperform. One must
-manually run 2 instances of `sa-solver` (eg. in 2 terminal consoles) to
-achieve the same performance level as the `silentarmy` **miner**.
-
-For a potential performance speedup, set `OPTIM_SIMPLIFY_ROUND` to 1,
-see [TROUBLESHOOTING.md](TROUBLESHOOTING.md).
+of the Equihash proof-of-work algorithm causing it to slightly underperform by
+5-10%. One must manually run 2 instances of `sa-solver` (eg. in 2 terminal
+consoles) to achieve the same performance level as the `silentarmy` **miner**.
 
 # Dependencies
 
@@ -173,7 +169,7 @@ Compiling SILENTARMY is easy:
 You may need to specify the paths to the locations of your OpenCL C headers
 and libOpenCL.so if the compiler does not find them, eg.:
 
-`make OPENCL_HEADERS=/usr/local/cuda-8.0/include LIBOPENCL=/usr/local/cuda-8.0/lib64`
+`$ make OPENCL_HEADERS=/usr/local/cuda-8.0/targets/x86_64-linux/include LIBOPENCL=/usr/local/cuda-8.0/targets/x86_64-linux/lib`
 
 Self-testing the command-line solver (solves 100 all-zero 140-byte blocks with
 their nonces varying from 0 to 99):
@@ -257,6 +253,8 @@ Donations welcome: t1cVviFvgJinQ4w3C2m2CfRxgP5DnHYaoFC
 
 I would like to thank these persons for their contributions to SILENTARMY,
 in alphabetical order:
+* eXtremal
+* kenshirothefist
 * lhl
 * nerdralph
 * poiuty
