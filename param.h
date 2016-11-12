@@ -34,7 +34,7 @@
 #define OVERHEAD                        9
 #endif
 
-#define CMULT 4
+#define CMULT 5
 
 #define NR_ROWS                         (1 << NR_ROWS_LOG)
 #define NR_SLOTS            ((1 << (APX_NR_ELMS_LOG - NR_ROWS_LOG)) * OVERHEAD)
